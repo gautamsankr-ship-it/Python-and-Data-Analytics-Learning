@@ -621,7 +621,7 @@ elif "Task 8" in menu_selection:
         """)
         
         st.markdown("---")
-        st.markdown("### 💡 Slide 9: Executive Strategic Insights")
+        st.markdown("### 💡 Executive Strategic Insights")
         st.info("""
         * **Biometric Risk Adjustments:** Traditional flat-rate policies misprice high-risk groups. The system highlights that policyholders who smoke and have a BMI over 30 require immediate premium adjustments.
         * **Behavior-Based Insurance Pricing:** Transition away from traditional manual rules and offer cost discounts to clients who provide verifiable health metrics or meet smoking cessation targets.
