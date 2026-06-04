@@ -13,7 +13,7 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 # PAGE CONFIGURATION & ICAN DOCS STYLING (Custom CSS)
 # ====================================================
 st.set_page_config(
-    page_title="ICAN Analytics Portal - Insurance Project", 
+    page_title="Pricing Insurance charges - Predictive Modeling", 
     page_icon="📚",
     layout="wide", 
     initial_sidebar_state="expanded"
@@ -85,8 +85,8 @@ df_raw = load_data()
 # ====================================================
 st.markdown("""
     <div class="ican-banner">
-        <h1>Python & Data Analytics for Professionals</h1>
-        <p>Project Assessment Assignment Workspace — End-to-End Insurance Pricing Pipeline</p>
+        <h1>Insurance charges Pricing Modeling using Machine Learning Model</h1>
+        <p>Project Assignment </p>
     </div>
 """, unsafe_allow_html=True)
 
@@ -97,7 +97,7 @@ st.sidebar.markdown("<h3 style='color: #2980b9; font-weight: bold;'>Documentatio
 menu_selection = st.sidebar.radio(
     "Modules Navigation:",
     [
-        "👋 Introduction & Participant Profile",
+        "👋 Participant Profile",
         "📋 Task 1 & 2: Dataset Understanding & Exploration",
         "📊 Task 3: Kaggle Exploratory Visual EDA",
         "🛠️ Task 4: Beginner Data Cleaning & Splits",
@@ -108,13 +108,11 @@ menu_selection = st.sidebar.radio(
     ]
 )
 
+
 # ====================================================================
 # 👋 INTRODUCTION & PARTICIPANT PROFILE PANEL (FIRST PAGE)
 # ====================================================================
-# ====================================================================
-# 👋 INTRODUCTION & PARTICIPANT PROFILE PANEL (FIRST PAGE)
-# ====================================================================
-if menu_selection == "👋 Introduction & Participant Profile":
+if menu_selection == "👋 Participant Profile":
     st.subheader("📌 Project Assessment Portfolio")
     
     # Minified single-string block to guarantee Streamlit parser rendering
@@ -123,9 +121,7 @@ if menu_selection == "👋 Introduction & Participant Profile":
         'box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; '
         'border-top: 5px solid #2980b9; margin-bottom: 25px;">'
         '<h1 style="color: #2c3e50; font-weight: 300; margin-top: 0; font-size: 28px;">'
-        'Automated Medical Risk Underwriting System</h1>'
-        '<p style="color: #7f8c8d; font-size: 15px; margin-bottom: 20px;">'
-        'Data Analysis, Artificial Intelligence, Machine Learning, and Power BI Enterprise Integration Pipeline</p>'
+        'Health Insurance Charges Pricing Model</h1>'
         '<hr style="border: 0; border-top: 1px solid #edf2f7; margin-bottom: 20px;">'
         '<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;">'
         '<div>'
@@ -153,18 +149,18 @@ if menu_selection == "👋 Introduction & Participant Profile":
     st.markdown(profile_html, unsafe_allow_html=True)
     
     # Business Background Context
-    st.markdown("### ⚠️ Executive Business Problem Statement")
+    st.markdown("### ⚠️ Business Problem Statement")
     st.markdown("""
-    * **The Operational Challenge:** Traditional insurance underwriting frameworks rely heavily on manual verification rules and flat demographic tables. This creates slow turnaround times and leaves insurance companies vulnerable to premium mispricing.
+    * **The Operational Challenge:** Traditional insurance underwriting frameworks rely heavily on manual verification rules and flat demographic tables. This creates slow turnaround times and leaves insurance companies vulnerable to premium mispricing. 
     * **Hidden Risk Interactions:** Traditional flat linear models evaluate health variables independently (such as tracking a weight index without accounting for lifestyle factors). This approach misses complex risk combinations.
     * **Core Technical Goal:** This interactive application framework demonstrates a production-grade analytics pipeline. It handles automated data intake, interactive data visualization, feature engineering, and robust machine learning to accurately estimate individual medical risk profiles using 1,338 historical policyholder records.
     """)
 
 # ====================================================================
-# 📋 TASK 1 & 2: DATASET UNDERSTANDING & EXPLORATION (EXPLICIT VALUES)
+# 📋 TASK 1 & 2: DATASET UNDERSTANDING & EXPLORATION 
 # ====================================================================
 elif "Task 1 & 2" in menu_selection:
-    st.header("📋 Task 1 & 2: Dataset Understanding & Descriptive Statistical Analysis")
+    st.header("📋 Task 1 & 2: Dataset Understanding & Exploration")
     
     st.markdown("""
     <div class="admonition-tip">
@@ -231,7 +227,7 @@ elif "Task 1 & 2" in menu_selection:
 # TASK 3: DETAILED EXPLORATORY DATA ANALYSIS & VISUALISATIONS
 # ====================================================================
 elif "Task 3" in menu_selection:
-    st.header("📊 Task 3: Comprehensive Exploratory Data Analysis (EDA)")
+    st.header("📊 Task 3: Kaggle Exploratory Visual EDA")
     
     # --- DATA CLEANING SUMMARY ---
     st.subheader("1. Data Quality & Cleaning Inspections")
@@ -360,7 +356,7 @@ print(f"New shape: {df_cleaned.shape}")
 # TASK 4: DATA PREPROCESSING PIPELINE
 # ====================================================
 elif "Task 4" in menu_selection:
-    st.header("🛠️ Task 4: Data Preprocessing & Baseline Splits Framework")
+    st.header("🛠️ Task 4: Beginner Data Cleaning & Splits")
     
     st.markdown("""
     ### 💡 Preprocessing Technical Concepts Explained for Beginners
@@ -402,7 +398,7 @@ elif "Task 4" in menu_selection:
 # TASK 5: FEATURE ENGINEERING ACTIVITIES
 # ====================================================
 elif "Task 5" in menu_selection:
-    st.header("✨ Task 5: Feature Engineering & Dimension Reduction Framework")
+    st.header("✨ Task 5: Feature Engineering &  Matrix")
     
     st.markdown("""
     **Beginner Guide:** Raw data columns often need formatting or combining before machine learning models can process them accurately. 
@@ -596,8 +592,7 @@ elif "Task 8" in menu_selection:
     # Embedded Slide Presentation Header
     st.markdown("""
     <div style="background-color: #2c3e50; padding: 20px; border-radius: 4px; margin-bottom: 20px; border-left: 5px solid #f1c40f;">
-        <h4 style="color: #f1c40f; margin: 0; text-transform: uppercase; font-size: 13px; letter-spacing: 1px;">Slide Presentation Mode</h4>
-        <h2 style="color: white; margin: 5px 0 0 0; font-weight: 400;">Slide 8 & 9: Power BI Architecture & Business Insights</h2>
+        <h2 style="color: white; margin: 5px 0 0 0; font-weight: 400;">Power BI Dashboard & Business Insights</h2>
     </div>
     """, unsafe_allow_html=True)
     
@@ -680,7 +675,7 @@ elif "Task 8" in menu_selection:
 # TASK 9: ARTIFICIAL INTELLIGENCE PROMPT ENGINEERING (C4 FRAMEWORK)
 # ====================================================================
 elif "Task 9" in menu_selection:
-    st.header("🧠 Task 9: AI Prompt Engineering & Strategic Matrix Framework")
+    st.header("🧠 Task 9: AI Prompt Engineering  Matrix")
     
     st.markdown("""
     **Core Methodology: The C4 Prompt Engineering Model**
