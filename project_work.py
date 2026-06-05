@@ -96,7 +96,7 @@ st.markdown("""
 st.sidebar.markdown("<h3 style='color: #2980b9; font-weight: bold;'>Documentation</h3>", unsafe_allow_html=True)
 menu_selection = st.sidebar.radio(
     "Modules Navigation:",
-    [
+    options=[
         "👋 Participant Profile",
         "📋 Task 1 & 2: Dataset Understanding & Exploration",
         "📊 Task 3: Kaggle Exploratory Visual EDA",
@@ -104,7 +104,8 @@ menu_selection = st.sidebar.radio(
         "✨ Task 5: Feature Engineering Matrix",
         "🤖 Task 6 & 7: Model Analytics & Metrics Evaluation",
         "🖥️ Task 8: Power BI Dashboard & Business Insights",
-        "🧠 Task 9: AI Prompt Engineering Matrix"
+        "🧠 Task 9: AI Prompt Engineering Matrix",
+        "🔮 Task 10: Live Premium Prediction Engine"  # <-- ADD THIS NEW LINE
     ]
 )
 
@@ -903,3 +904,88 @@ elif "Task 10" in menu_selection:
         * **Proven Value:** Demonstrated that machine learning models out-perform traditional manual rule sheets.
         * **Future Upgrades:** Plan to integrate real-time API integrations with health wearables (like fitness trackers) for dynamic, behavior-based insurance pricing.
         """)        
+
+# ==============================================================================
+# 🔮 Task 10: Model Practice - Live Premium Prediction Engine
+# ==============================================================================
+st.markdown("---")
+st.header("🔮 Task 10: Real-Time Premium Estimation Engine")
+st.write(
+    "Provide custom risk variables below to train a live Random Forest model "
+    "and generate an immediate predictive premium quote."
+)
+
+# 1. Ensure we have access to your cleaned dataset inside this task block
+# We check for common variable names used in your previous steps (df or X, y)
+try:
+    # Look for your existing encoded data features, or create them fresh from df
+    if 'X' in locals() and 'y' in locals():
+        X_train_live, y_train_live = X, y
+    elif 'df' in locals():
+        # Cleanly drop target and encode matching your earlier EDA tasks
+        df_clean = df.copy()
+        df_encoded = pd.get_dummies(df_clean, drop_first=True)
+        X_train_live = df_encoded.drop(columns=["charges"])
+        y_train_live = df_encoded["charges"]
+    else:
+        # Emergency backup fallback: re-read the raw file if variables aren't found globally
+        df_backup = pd.read_csv("insurance.csv")
+        df_encoded = pd.get_dummies(df_backup, drop_first=True)
+        X_train_live = df_encoded.drop(columns=["charges"])
+        y_train_live = df_encoded["charges"]
+
+    # 2. Organize the real-time user inputs inside visual columns
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        age = st.number_input("Age of Primary Insured", min_value=18, max_value=100, value=30, step=1, key="t10_age")
+        sex = st.selectbox("Biological Sex", options=["male", "female"], key="t10_sex")
+
+    with col2:
+        bmi = st.number_input("Body Mass Index (BMI)", min_value=10.0, max_value=60.0, value=25.0, step=0.1, key="t10_bmi")
+        children = st.number_input("Number of Dependents / Children", min_value=0, max_value=10, value=0, step=1, key="t10_children")
+
+    with col3:
+        smoker = st.selectbox("Smoking Status", options=["no", "yes"], key="t10_smoker")
+        region = st.selectbox("Geographic US Region", options=["northeast", "northwest", "southeast", "southwest"], key="t10_region")
+
+    # 3. Calculation and Live Training Execution Trigger
+    if st.button("Train Model & Generate Quote", type="primary"):
+        with st.spinner("Fitting Random Forest trees on your dataset..."):
+            from sklearn.ensemble import RandomForestRegressor
+            
+            # Here is the .fit() statement you need! It runs dynamically when the button is clicked.
+            live_model = RandomForestRegressor(n_estimators=100, random_state=42)
+            live_model.fit(X_train_live, y_train_live)
+            
+            # Package the interactive UI state into a dummy-aligned matrix payload
+            raw_payload = {
+                'age': age, 
+                'bmi': bmi, 
+                'children': children, 
+                'sex': sex, 
+                'smoker': smoker, 
+                'region': region
+            }
+            payload_df = pd.DataFrame([raw_payload])
+            encoded_payload = pd.get_dummies(payload_df)
+            
+            # Align user selection perfectly with the active dataset feature matrix columns
+            feature_columns = list(X_train_live.columns)
+            aligned_input = encoded_payload.reindex(columns=feature_columns, fill_value=0)
+            
+            # Execute model pricing prediction inference
+            predicted_cost = live_model.predict(aligned_input)[0]
+            
+            # Render aesthetic metrics summary card
+            st.success(f"### Predicted Base Premium Cost: ${predicted_cost:,.2f}")
+            
+            # Strategic risk alerting based on model interaction logic
+            if smoker == "yes" and bmi >= 30.0:
+                st.warning(
+                    "⚠️ **Risk Surcharge Flagged:** High BMI combined with a positive "
+                    "smoking profile heavily compounded the premium baseline during tree branching splits."
+                )
+
+except Exception as e:
+    st.error(f"🛑 **Configuration Error:** Could not parse underlying data variables. Details: {e}")
